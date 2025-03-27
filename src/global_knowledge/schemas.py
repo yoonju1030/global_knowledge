@@ -21,6 +21,6 @@ class QuizResponse(BaseModel):
 class QuestionSearchByQuiz(BaseModel):
     id: str
 
-class SignUpInfo(BaseModel):
+class UserInfo(BaseModel):
     user_id: str
     password: str
