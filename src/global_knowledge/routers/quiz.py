@@ -1,9 +1,9 @@
 from fastapi import APIRouter, HTTPException, Request, Depends
-from typing import  Union
-from schemas import QuizCreate, QuizResponse
+from typing import Union
+from src.global_knowledge.schemas import QuizCreate, QuizResponse
 from sqlalchemy.orm import Session
-from models import Quiz, Question
-from db import get_db
+from src.global_knowledge.models import Quiz, Question
+from src.global_knowledge.db import get_db
 
 quiz_router = APIRouter(prefix="/register")
 
