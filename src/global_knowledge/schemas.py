@@ -17,3 +17,6 @@ class QuizCreate(BaseModel):
 
 class QuizResponse(BaseModel):
     msg: str
+
+class QuestionSearchByQuiz(BaseModel):
+    id: str

@@ -1,8 +1,6 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Text, ARRAY
+from sqlalchemy import Column, Integer, String, ForeignKey, Text, ARRAY, Boolean
 from sqlalchemy.orm import relationship
 from src.global_knowledge.db import Base
-from uuid import UUID, uuid4
-
 
 class Quiz(Base):
     __tablename__ = "quizzes"

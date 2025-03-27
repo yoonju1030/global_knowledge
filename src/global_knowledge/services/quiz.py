@@ -19,6 +19,12 @@ class QuizService:
             return db_quiz.id
         except Exception as e:
             raise e
+        
+    def delete_quiz(self):
+        try:
+            pass
+        except Exception as e:
+            raise e
 
 
 
