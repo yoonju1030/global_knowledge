@@ -18,3 +18,11 @@ class Question(Base):
     answers = Column(ARRAY(String))
     correct_answer = Column(Integer)
     quiz = relationship("Quiz", back_populates="questions")
+
+class User(Base):
+    __tablename__ = "users"
+    
+    id = Column(String(255), primary_key=True)
+    user_id = Column(String(50), unique=True)
+    hashed_password = Column(String)
+    admin_status = Column(Boolean)
