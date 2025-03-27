@@ -4,7 +4,7 @@ from src.global_knowledge.schemas import UserInfo
 from fastapi import HTTPException
 from src.global_knowledge.auth import hash_password, verify_password, create_access_token
 from uuid import UUID, uuid4
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 class UserService:
     def __init__(self):
