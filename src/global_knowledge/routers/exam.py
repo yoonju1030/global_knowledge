@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from src.global_knowledge.schemas import ExamInfo, ExamCreateResponse, ExamSubmitInfo
+from src.global_knowledge.schemas import ExamInfo, ExamCreateResponse, ExamSubmitInfo, ExamQuestionInfo
 from sqlalchemy.orm import Session
 from src.global_knowledge.db import get_db
 from src.global_knowledge.services.exam import ExamService
@@ -35,17 +35,19 @@ def submit_exam_quiz(
         exam_service = ExamService(user_id)
         results = exam_service.submit_exam(exam_submit_info.exam_id, db)
         return results
-
     except Exception as e:
         raise e
 
 
 @exam_router.post("/quiz/question")
 def submit_exam_quiz(
-    current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
+    exam_question_info: ExamQuestionInfo,
+    current_user: User = Depends(get_current_user), 
+    db: Session = Depends(get_db)
 ):
     try:
-        # 문제 답 체크
-        pass
+        user_id = current_user.id
+        exam_service = ExamService(user_id)
+        exam_service.check_answer(exam_question_info, db)
     except Exception as e:
         raise e

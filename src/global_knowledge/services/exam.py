@@ -3,6 +3,7 @@ from src.global_knowledge.schemas import (
     ExamInfo,
     ExamCreateResponse,
     ExamCreateQuestion,
+    ExamQuestionInfo
 )
 from src.global_knowledge.models import Exam, ExamQuestion, Question
 from typing import List
@@ -95,5 +96,12 @@ class ExamService:
             ).all()
             answers = list(map(lambda x:{"id":x.id,"orders": x.orders, "question_id": x.question_id, "check_answer": x.check_answer, "correct_answer": x.correct_answer}, results))
             return answers
+        except Exception as e:
+            raise e
+        
+    def check_answer(self, exam_question_info: ExamQuestionInfo, db: Session):
+        try:
+            db.query(ExamQuestion).filter_by(id=exam_question_info.exam_question_id).update({"check_answer": exam_question_info.answer})
+            db.commit()
         except Exception as e:
             raise e

@@ -37,6 +37,10 @@ class ExamInfo(BaseModel):
 class ExamSubmitInfo(BaseModel):
     exam_id: str
 
+class ExamQuestionInfo(BaseModel):
+    exam_question_id: str
+    answer: int
+
 
 class ExamCreateQuestion(BaseModel):
     text: str
