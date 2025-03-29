@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from src.global_knowledge.db import get_db
 from src.global_knowledge.services.quiz import QuizService
 
+
 quiz_router = APIRouter(prefix="/register")
 
 

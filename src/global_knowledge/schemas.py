@@ -47,6 +47,7 @@ class ExamCreateQuestion(BaseModel):
     answers: List[str]
     correct_answer: int
     check_answer: int
+    pages: int
     orders: int
 
 

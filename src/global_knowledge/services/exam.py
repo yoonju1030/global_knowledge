@@ -5,7 +5,7 @@ from src.global_knowledge.schemas import (
     ExamCreateQuestion,
     ExamQuestionInfo
 )
-from src.global_knowledge.models import Exam, ExamQuestion, Question
+from src.global_knowledge.models import Exam, ExamQuestion, Question, Setting
 from typing import List
 from sqlalchemy import select
 import datetime
@@ -54,6 +54,7 @@ class ExamService:
                         answers=r[1].answers,
                         correct_answer=r[1].correct_answer,
                         check_answer=r[1].check_answer,
+                        pages=r[1].page,
                         orders=r[1].orders,
                     )
                     exam_create_questions.append(exam_create_question)
@@ -68,14 +69,23 @@ class ExamService:
             results = db.scalars(
                 select(Question).where(Question.quiz_id == quiz_id)
             ).all()
+
+            page_result = db.scalars(
+                select(Setting).where(Setting.category == "page").order_by(Setting.set_date.desc())
+            ).one()
+            setting_page = page_result.value
+
             exam_question_list = list()
             if len(results) > 0:
                 for idx in range(len(results)):
+                    page = idx // setting_page
+                    order = idx % setting_page
                     new_exam_question = ExamQuestion(
                         id=str(uuid4()),
                         exam_id=exam_uuid,
                         question_id=results[idx].id,
-                        orders=idx,
+                        page=page,
+                        orders=order,
                         answers=results[idx].answers,
                         correct_answer=results[idx].correct_answer,
                         check_answer=-1,

@@ -1,7 +1,8 @@
 from src.global_knowledge.schemas import QuizCreate, QuestionBase
 from sqlalchemy.orm import Session
+from sqlalchemy import select
 
-from src.global_knowledge.models import Quiz, Question
+from src.global_knowledge.models import Quiz, Question, Setting
 from uuid import UUID, uuid4
 class QuizService:
     def __init__(self):
@@ -19,7 +20,7 @@ class QuizService:
             return db_quiz.id
         except Exception as e:
             raise e
-        
+ 
     def delete_quiz(self):
         try:
             pass
