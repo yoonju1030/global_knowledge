@@ -38,6 +38,14 @@ class User(Base):
     hashed_password = Column(String)
     admin_status = Column(Boolean)
 
+class Setting(Base):
+    __tablename__ = "setting"
+
+    id = Column(String(255), primary_key=True)
+    category = Column(String)
+    value = Column(Integer)
+    set_date = Column(DateTime(timezone=True))
+
 
 class Exam(Base):
     __tablename__ = "exams"

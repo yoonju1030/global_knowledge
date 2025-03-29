@@ -53,3 +53,6 @@ class ExamCreateQuestion(BaseModel):
 class ExamCreateResponse(BaseModel):
     exam_id: str
     exam_create_questions: List[ExamCreateQuestion]
+
+class PageInfo(BaseModel):
+    page: int
