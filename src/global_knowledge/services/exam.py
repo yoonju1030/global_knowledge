@@ -85,8 +85,15 @@ class ExamService:
         except Exception as e:
             raise e
 
-    def submit_exam(self):
+    def submit_exam(self, exam_id: str, db: Session):
         try:
-            pass
+            db.query(Exam).filter_by(id=exam_id).update({"submit": True})
+            db.commit()
+            results = db.scalars(
+                select(ExamQuestion)
+                .where(ExamQuestion.exam_id == exam_id)
+            ).all()
+            answers = list(map(lambda x:{"id":x.id,"orders": x.orders, "question_id": x.question_id, "check_answer": x.check_answer, "correct_answer": x.correct_answer}, results))
+            return answers
         except Exception as e:
             raise e

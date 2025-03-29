@@ -31,11 +31,11 @@ def submit_exam_quiz(
     db: Session = Depends(get_db),
 ):
     try:
-        user_id = current_user.id
+        user_id =current_user.id
         exam_service = ExamService(user_id)
-        # 퀴즈 풀이에 submit
-        # 채점
-        pass
+        results = exam_service.submit_exam(exam_submit_info.exam_id, db)
+        return results
+
     except Exception as e:
         raise e
 
