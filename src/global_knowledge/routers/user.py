@@ -9,6 +9,7 @@ from src.global_knowledge.auth import get_current_user
 
 user_router = APIRouter(prefix="/user")
 
+
 @user_router.post("/signup")
 def signup(signup_info: UserInfo, db: Session = Depends(get_db)):
     try:
@@ -17,7 +18,8 @@ def signup(signup_info: UserInfo, db: Session = Depends(get_db)):
         return {"message": "User created successfully"}
     except Exception as e:
         raise e
-    
+
+
 @user_router.post("/login")
 def login(login_info: UserInfo, db: Session = Depends(get_db)):
     try:
@@ -26,7 +28,8 @@ def login(login_info: UserInfo, db: Session = Depends(get_db)):
         return token
     except Exception as e:
         raise e
-    
+
+
 @user_router.get("/auth_check")
 def auth_check(current_user: User = Depends(get_current_user)):
     try:
