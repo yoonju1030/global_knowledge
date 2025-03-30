@@ -24,4 +24,10 @@ DB_NAME=
 poetry run uvicorn src.global_knowledge.main:app --reload
 ```
 
+## docs
+```
+http://{실행 서버 ip or 127.0.0.1}:8000/docs
+```
+위 url에 swagger 문서로 확인해주시기 바랍니다.
+
 - 실행 중 이슈 발생 시 meoliet1030@gmail.com 으로 연락 부탁드립니다.
