@@ -9,7 +9,12 @@ from src.global_knowledge.auth import get_current_user
 exam_router = APIRouter(prefix="/exam")
 
 
-@exam_router.post("/quiz", response_model=ExamCreateResponse)
+@exam_router.post(
+    "/quiz", 
+    response_model=ExamCreateResponse,
+    summary="시험 생성 엔드포인트", 
+    description="시험 생성을 원하는 quiz의 id(uuid)를 quiz_id 값으로 지정해 요청한다"
+)
 def exam_quiz(
     exam_info: ExamInfo,
     current_user: User = Depends(get_current_user),
@@ -24,7 +29,11 @@ def exam_quiz(
         raise e
 
 
-@exam_router.post("/quiz/submit")
+@exam_router.post(
+    "/quiz/submit",
+    summary="시험 최종 제출 엔드포인트", 
+    description="제출을 원하는 시험의 id(uuid) exam_id 값으로 지정해 요청한다."
+)
 def submit_exam_quiz(
     exam_submit_info: ExamSubmitInfo,
     current_user: User = Depends(get_current_user),
@@ -39,7 +48,11 @@ def submit_exam_quiz(
         raise e
 
 
-@exam_router.post("/quiz/question")
+@exam_router.post(
+    "/quiz/question",
+    summary="문제 답 체크 엔드포인트", 
+    description="풀고자하는 문제의 id(uuid)를 exam_question_id 값으로, 답의 인덱스를 answer 값으로 지정해 요청한다."
+)
 def submit_exam_quiz(
     exam_question_info: ExamQuestionInfo,
     current_user: User = Depends(get_current_user), 

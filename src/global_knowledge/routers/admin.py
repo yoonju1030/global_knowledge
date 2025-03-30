@@ -9,7 +9,11 @@ from src.global_knowledge.auth import get_current_user
 
 admin_router = APIRouter(prefix="/admin")
 
-@admin_router.post("/page")
+@admin_router.post(
+    "/page",
+    summary="페이지 당 문제 갯수 세팅", 
+    description="페이지 당 보여지는 문제 개수 를 page 값으로 지정하여 요청"
+)
 def set_page(
     page_info: PageInfo,
     current_user: User = Depends(get_current_user),        
